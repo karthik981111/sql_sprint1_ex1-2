@@ -1,0 +1,301 @@
+create database  pratice 
+use database pratice
+
+create table public.Location
+(LOC_ID INT PRIMARY KEY,
+STREET_NO INT,
+VILL_NAME VARCHAR(40),
+CITY VARCHAR(30),
+STATE VARCHAR(25),
+COUNTRY VARCHAR(30));
+
+create table public.Jobs
+(JOB_ID INT PRIMARY KEY,
+JOB_TITLE VARCHAR(30));
+
+create table public.department
+(DEPT_ID INT primary key ,	
+DEPT_NAME VARCHAR (30),		
+LOC_ID INT ,	
+DEPT_HEAD VARCHAR (30),
+FOREIGN KEY (LOC_ID) REFERENCES LOCATION (LOC_ID));
+
+drop table employee
+
+
+create table public.employee 
+(EMPLOYEE_ID INT PRIMARY KEY,
+EMP_NAME  VARCHAR(30),
+DEPT_ID  INT ,	
+JOINING_DT	DATE,	 	 
+DOB	DATE,	 	 
+YRS_OF_EXP	NUMERIC,	 	 
+PHONE_NUMB	INT ,	 	 
+MARTIAL_STATUS	BOOLEAN,	 	 
+JOB_ID INT,
+SALARY  DECIMAL, 	 
+MANAGER_ID  INT ,
+FOREIGN KEY (JOB_ID) REFERENCES Jobs(JOB_ID),
+FOREIGN KEY (DEPT_ID) REFERENCES department (DEPT_ID));
+
+create table public.dependents  
+(DEP_ID INT	PRIMARY KEY,
+DEP_NAME  VARCHAR(50),	
+RELATIONSHIP  VARCHAR (25),	
+EMPLOYEE_ID  INT,
+FOREIGN KEY (EMPLOYEE_ID) REFERENCES employee(EMPLOYEE_ID));
+
+INSERT INTO LOCATION (LOC_ID, STREET_NO, VILL_NAME, CITY, STATE, COUNTRY) 
+VALUES (1, 100,'PALI','KADAPA','AP','INDIA');
+INSERT INTO LOCATION (LOC_ID, STREET_NO, VILL_NAME, CITY, STATE, COUNTRY) 
+VALUES (2, 101,'RAYACHOTI','KADAPA','AP','INDIA');
+INSERT INTO LOCATION (LOC_ID, STREET_NO, VILL_NAME, CITY, STATE, COUNTRY) 
+VALUES (3, 102,'XYZ','ABC','BIHAR','INDIA');
+INSERT INTO LOCATION (LOC_ID, STREET_NO, VILL_NAME, CITY, STATE, COUNTRY) 
+VALUES (4, 103,'DELHI VILLAGE','DELHI CITY','DELHI','INDIA');
+INSERT INTO LOCATION (LOC_ID, STREET_NO, VILL_NAME, CITY, STATE, COUNTRY) 
+VALUES (5, 104,'PONDI','PONDI CITY','PONDICHERRY','INDIA');
+
+INSERT INTO JOBS(JOB_ID,JOB_TITLE) VALUES(1,'MANAGER');
+INSERT INTO JOBS(JOB_ID,JOB_TITLE) VALUES(2,'HR');
+INSERT INTO JOBS(JOB_ID,JOB_TITLE) VALUES(3,'ASSISTANT');
+INSERT INTO JOBS(JOB_ID,JOB_TITLE) VALUES(4,'ANALYST');
+INSERT INTO JOBS(JOB_ID,JOB_TITLE) VALUES(5,'SENIOR ANALYST');
+
+INSERT INTO DEPARTMENT(DEPT_ID,DEPT_NAME,LOC_ID ,DEPT_HEAD)
+VALUES (420,'IPS',1,'MAHESH BABU');
+INSERT INTO DEPARTMENT(DEPT_ID,DEPT_NAME,LOC_ID ,DEPT_HEAD)
+VALUES (421,'IAS',2,'GINAA');
+INSERT INTO DEPARTMENT(DEPT_ID,DEPT_NAME,LOC_ID ,DEPT_HEAD)
+VALUES (422,'IFS',3,'MANCHU VISHNU');
+INSERT INTO DEPARTMENT(DEPT_ID,DEPT_NAME,LOC_ID ,DEPT_HEAD)
+VALUES (423,'ISI',4,'ALLU ARJUN');
+INSERT INTO DEPARTMENT(DEPT_ID,DEPT_NAME,LOC_ID ,DEPT_HEAD)
+VALUES (424,'ISIS',5,'RAVITEJA');
+
+INSERT INTO DEPENDENTS(DEP_ID,DEP_NAME,RELATIONSHIP,EMPLOYEE_ID)
+VALUES (1, 'Akshay', 'Brother', 2);
+INSERT INTO DEPENDENTS(DEP_ID,DEP_NAME,RELATIONSHIP,EMPLOYEE_ID)
+VALUES (2, 'Khaleel', 'Father', 3);
+INSERT INTO DEPENDENTS(DEP_ID,DEP_NAME,RELATIONSHIP,EMPLOYEE_ID)
+VALUES (3, 'Srinivas', 'Brother', 1);
+INSERT INTO DEPENDENTS(DEP_ID,DEP_NAME,RELATIONSHIP,EMPLOYEE_ID)
+VALUES (4, 'Karthik', 'Bro', 4);
+INSERT INTO DEPENDENTS(DEP_ID,DEP_NAME,RELATIONSHIP,EMPLOYEE_ID)
+VALUES (5, 'Hanumanth', 'Mother', 5);
+
+
+INSERT INTO EMPLOYEE(EMPLOYEE_ID, EMP_NAME, DEPT_ID, JOINING_DT, DOB, YRS_OF_EXP, PHONE_NUMB, 	 
+MARTIAL_STATUS , JOB_ID, SALARY, MANAGER_ID) 
+VALUES(1, 'RAM', 420, TO_DATE('08/11/2022','DD/MM/YYYY'), TO_DATE('08/01/2001','DD/MM/YYYY'), 2, 1234567890, 1,1, 50000, 100 );
+  
+INSERT INTO EMPLOYEE(EMPLOYEE_ID, EMP_NAME, DEPT_ID, JOINING_DT, DOB, YRS_OF_EXP, PHONE_NUMB, 	 
+MARTIAL_STATUS , JOB_ID, SALARY, MANAGER_ID) 
+VALUES(2, 'ARJUN', 421, TO_DATE('09/12/2021','DD/MM/YYYY'),TO_DATE('08/11/2002','DD/MM/YYYY'), 1, 1234567899, 1,2, 52000, 101 );
+INSERT INTO EMPLOYEE(EMPLOYEE_ID, EMP_NAME, DEPT_ID, JOINING_DT, DOB, YRS_OF_EXP, PHONE_NUMB, 	 
+MARTIAL_STATUS , JOB_ID, SALARY, MANAGER_ID) 
+VALUES(3, 'BHEEM', 422, TO_DATE('08/10/2022','DD/MM/YYYY'), TO_DATE('08/01/1999','DD/MM/YYYY'), 3, 1234567890, 0,1, 70000, 102 );
+INSERT INTO EMPLOYEE(EMPLOYEE_ID, EMP_NAME, DEPT_ID, JOINING_DT, DOB, YRS_OF_EXP, PHONE_NUMB, 	 
+MARTIAL_STATUS , JOB_ID, SALARY, MANAGER_ID) 
+VALUES(4, 'RAJU', 423, TO_DATE('08/11/2021','DD/MM/YYYY'), TO_DATE('18/10/2000','DD/MM/YYYY'), 2, 1234567890, 1,1, 45000, 103 );
+INSERT INTO EMPLOYEE(EMPLOYEE_ID, EMP_NAME, DEPT_ID, JOINING_DT, DOB, YRS_OF_EXP, PHONE_NUMB, 	 
+MARTIAL_STATUS , JOB_ID, SALARY, MANAGER_ID) 
+VALUES(5, 'RAVI', 424, TO_DATE('08/12/2019','DD/MM/YYYY'), TO_DATE('28/02/2002','DD/MM/YYYY'), 1, 1234567890, 0,1, 55000, 104 );
+
+______2.1.1
+SELECT E.EMP_NAME,E.EMPLOYEE_ID,D.DEPT_ID,D.DEPT_NAME  FROM EMPLOYEE E 
+JOIN DEPARTMENT D on  E.DEPT_ID = D.DEPT_ID  where D.DEPT_ID IS NOT NULL ;
+______2.1.2
+SELECT EMP_NAME, SALARY FROM EMPLOYEE;
+ 
+___2.2.1
+
+SELECT * FROM EMPLOYEE WHERE SALARY < 50000 ;
+SELECT * FROM EMPLOYEE WHERE SALARY > 50000 ;
+
+____2.2.2
+SELECT EMPLOYEE_ID,EMP_NAME FROM EMPLOYEE WHERE JOINING_DT <('2021-01-01');
+ _____2.2.3
+
+ SELECT EMP_NAME , SALARY FROM EMPLOYEE WHERE MANAGER_ID = 1 OR 2 OR 3 OR 4 ;
+ ___2.2.4
+ 
+ SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NAME LIKE 'R%';
+  __2.2.5
+select emp_name from employee_table
+where salary in (SELECT SALARY FROM EMPLOYEE GROUP BY SALARY HAVING COUNT(*)>1);
+______2.2.6
+ SELECT EMP_NAME FROM EMPLOYEE E
+JOIN DEPARTMENT D
+ON E.DEPT_ID = D.DEPT_ID 
+WHERE D.DEPT_NAME IN ('IPS', 'IAS', 'IFS');
+ 
+select e.dept_id, count(*)as total_no_of_employee from employee e
+where e.dept_id is not null
+group by e.dept_id
+order by e.dept_id asc;
+
+ 
+
+-question 2.3.2
+select emp_name, dept_id from employee where dept_id in (420,424)
+order by emp_name asc;
+SELECT * FROM EMPLOYEE;
+
+ 
+
+---question 2.3.3
+select e.emp_name,e.dept_id,d.dept_name from employee e, department d
+where e.dept_id=d.dept_id 
+order by e.emp_name; 
+
+ 
+
+---question 2.3.4
+select emp_name,DEPT_ID,YRS_OF_EXP from employee
+where MARTIAL_STATUS =1
+GROUP BY YRS_OF_EXP,emp_name,DEPT_ID
+order by DEPT_ID;
+select * from employee limit 5;
+
+ 
+
+
+--2.4 Joins
+---2.4.1
+select e.employee_id,e.emp_name,d.dept_name,l.state from employee e
+left join department d
+on e.DEPT_ID = d.DEPT_ID
+left join location l on d.loc_id = l.loc_id
+where l.state = 'pondi';
+SELECT * FROM LOCATION;
+
+ 
+
+---2.4.2
+select e.salary, e.emp_name,j.job_title from employee e 
+right join jobs j
+on e.job_id = j.job_id;
+
+ 
+
+
+---2.4.3
+select count(e.employee_id) as number_of_employees, j.job_title from employee e 
+inner join jobs j
+on e.job_id = j.job_id
+GROUP BY J.JOB_TITLE;
+
+ 
+
+
+---2.4.4
+select e.emp_name, d.dept_name as Unmarried from employee e
+full OUTER join department d
+on E.DEPT_ID=D.DEPT_ID
+where martial_status = 1;
+SELECT * FROM EMPLOYEE
+
+ 
+
+--2.5 Aggregations
+---2.5.1
+select max(salary)-min(salary) as Difference
+from employee;
+
+ 
+
+---2.5.2
+select e.emp_name,e.salary,d.dept_name from employee e, department d
+where e.dept_id = d.dept_id and d.dept_name ='IPS' and e.salary >= (select avg(salary) from employee);
+SELECT * FROM DEPARTMENT;
+
+ 
+
+---2.5.3
+select avg(salary),max(salary),min(salary) from employee
+group by dept_id;
+
+ 
+
+--2.6 SQL Functions
+---2.6.1
+SELECT SUBSTRING(emp_name, 1, 3 ) FROM employee;
+
+ 
+
+---2,6.2
+SELECT emp_name FROM employee
+WHERE emp_name LIKE '%a'
+  AND LENGTH (emp_name) = 3;
+  
+---2.6.3
+Select EMP_name,DOB, getdate() as CurrentDate, year(getdate())-year(dob) as age from Employee;
+
+ 
+
+---2.6.4
+SELECT lower(emp_name), length(emp_name) as name_length FROM employee;
+
+ 
+
+---2.6.5
+select emp_name,getdate() as CurrentDate from employee;
+
+ 
+
+---2.6.6
+ALTER TABLE EMPLOYEE
+MODIFY SALARY NUMBER(8,0);
+SELECT CEIL(SALARY) FROM EMPLOYEE;
+SELECT CAST(SALARY INT) FROM EMPLOYEE;
+
+ 
+
+---2.6.7
+SELECT TO_CHAR(joining_dt, 'YYYY-MM-DD') FROM employee;
+SELECT * FROM EMPLOYEE;
+
+ 
+
+--2.7 Index and view
+---2.7.1
+create or replace view KASHMIR_employees(emp_name,phone_numb,manager_id) as
+select e.emp_name,e.phone_numb,e.manager_id from employee e
+left join department d
+on E.DEPT_ID=D.DEPT_ID
+left join location l on d.loc_id = l.loc_id
+where l.city = 'DELHI';
+
+ 
+
+select * from Bangalore_employees;
+SELECT * FROM LOCATION
+
+ 
+
+----2.7.2
+create index EMP_INDEX on employee (emp_name,dob,martial_status);
+
+ 
+
+--2.8 Sub Queries
+
+ 
+
+---2.8.1
+select * from employee
+where dept_id in (select dept_id from department
+                  where loc_id in (select loc_id from location
+                                    where loc_id not in (1)));
+---2.8.2                                                                    
+select * from employee
+where salary >= (select avg(salary) from employee);
+
+ 
+
+---2.8.3
+select dept_name from department
+where dept_id in (select dept_id from employee
+                   where salary < 500000);
+ 
